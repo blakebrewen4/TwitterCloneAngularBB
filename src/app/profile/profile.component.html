@@ -1,6 +1,21 @@
+<!-- profile.component.html -->
+
 <div class="container">
-  <h2>Profile</h2>
-  <!-- Display user information here -->
-  <!-- Edit profile form -->
+  <h2>My Profile</h2>
+  <div class="profile-info">
+    <img src="path-to-profile-image.jpg" alt="Profile Picture">
+    <h3>{{ user.name }}</h3>
+    <p>{{ user.bio }}</p>
+    <p>Followers: {{ user.followers }}</p>
+    <button class="btn btn-primary">Edit Profile</button>
+  </div>
+
+  <h4>My Tweets</h4>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let tweet of userTweets">
+      {{ tweet.text }}
+    </li>
+  </ul>
 </div>
+
 

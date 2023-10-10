@@ -1,6 +1,30 @@
+<!-- feed.component.html -->
+
 <div class="container">
   <h2>Feed</h2>
-  <!-- Display a list of tweets here -->
-  <!-- Tweet input form -->
+
+  <!-- Tweet Input -->
+  <div class="form-group">
+    <input type="text" class="form-control" [(ngModel)]="newTweet" placeholder="What's on your mind?" maxlength="280">
+    <button class="btn btn-primary" (click)="postTweet()">Tweet</button>
+  </div>
+
+  <!-- List of Tweets -->
+  <div class="tweet" *ngFor="let tweet of tweets">
+    <h5>{{ tweet.author }}</h5>
+    <p>{{ tweet.text }}</p>
+    <div class="tweet-actions">
+      <button class="btn btn-outline-primary" (click)="likeTweet(tweet)">
+        <i class="fas fa-heart"></i> Like
+      </button>
+      <button class="btn btn-outline-info" (click)="commentOnTweet(tweet)">
+        <i class="fas fa-comment"></i> Comment
+      </button>
+      <button class="btn btn-outline-success" (click)="retweet(tweet)">
+        <i class="fas fa-retweet"></i> Retweet
+      </button>
+    </div>
+  </div>
 </div>
+
 

@@ -1,13 +1,15 @@
+<!-- login.component.html -->
+
 <div class="container">
   <h2>Login</h2>
-  <form>
+  <form (ngSubmit)="login()" #loginForm="ngForm">
     <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email" class="form-control" required>
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" required>
     </div>
     <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password" class="form-control" required>
+      <label for="password">Password</label>
+      <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" required>
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
   </form>
