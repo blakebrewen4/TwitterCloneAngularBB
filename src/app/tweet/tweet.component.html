@@ -6,13 +6,13 @@
     <h5>{{ tweet.author }}</h5>
     <p>{{ tweet.text }}</p>
     <div class="tweet-actions">
-      <button class="btn btn-outline-primary" (click)="likeTweet(tweet)">
+      <button class="btn btn-outline-primary" (click)="likeTweet()">
         <i class="fas fa-heart"></i> Like
       </button>
-      <button class="btn btn-outline-info" (click)="commentOnTweet(tweet)">
+      <button class="btn btn-outline-info" (click)="commentOnTweet()">
         <i class="fas fa-comment"></i> Comment
       </button>
-      <button class="btn btn-outline-success" (click)="retweet(tweet)">
+      <button class="btn btn-outline-success" (click)="retweet()">
         <i class="fas fa-retweet"></i> Retweet
       </button>
     </div>
@@ -27,6 +27,8 @@
 
   <div class="comment-input">
     <input type="text" class="form-control" [(ngModel)]="newComment" placeholder="Add a comment">
-    <button class="btn btn-primary" (click)="addComment(tweet)">Add Comment</button>
+    <button class="btn btn-primary" (click)="addComment()">Add Comment</button>
   </div>
 </div>
+
+

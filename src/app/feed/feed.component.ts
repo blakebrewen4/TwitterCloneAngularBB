@@ -65,8 +65,20 @@ export class FeedComponent implements OnInit {
   }
 
   retweet(tweet: any) {
-    // Implement the logic to retweet a tweet
-    // You can send a retweet request to your backend API here
+    // Send a request to your backend API to retweet the tweet
+    this.http.post<any>('https://your-api-url/retweet', { tweetId: tweet.id }).subscribe(
+      (response) => {
+        // Handle the response if needed
+        console.log('Retweeted tweet:', tweet);
+
+        // Update the tweet object or UI as necessary to reflect the retweet
+        tweet.isRetweeted = true; // You can add a property like 'isRetweeted' to your tweet object
+      },
+      (error) => {
+        // Handle the error if needed
+        console.error('Error retweeting tweet:', error);
+      }
+    );
   }
 
   postTweet() {
