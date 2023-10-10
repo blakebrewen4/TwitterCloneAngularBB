@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { FeedComponent } from './feed/feed.component';
 import { TweetComponent } from './tweet/tweet.component';
 import { FormsModule } from '@angular/forms';
+import { TweetService } from './tweet/tweet.service';
 
 // Import RouterModule and Routes from '@angular/router'
 import { RouterModule, Routes } from '@angular/router';
@@ -37,7 +38,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes), // Import and configure RouterModule with your routes
     FormsModule,
   ],
-  providers: [],
+  providers: [TweetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
