@@ -5,8 +5,8 @@
   <div class="mb-3">
     <textarea class="form-control" [(ngModel)]="newTweet" placeholder="What's on your mind?" rows="3" maxlength="280"></textarea>
     <div class="d-flex justify-content-end mt-2">
-      <span class="text-muted me-2">{{280 - newTweet?.length || 0}} characters left</span>
-      <button class="btn btn-primary" (click)="postTweet()" [disabled]="!newTweet || newTweet?.length === 0">Tweet</button>
+      <span class="text-muted me-2">{{280 - newTweet.length || 0}} characters left</span>
+      <button class="btn btn-primary" (click)="postTweet()" [disabled]="!newTweet || newTweet.length === 0">Tweet</button>
     </div>
   </div>
 

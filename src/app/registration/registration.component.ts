@@ -24,6 +24,10 @@ export class RegistrationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.initializeForm();
+  }
+
+  private initializeForm(): void {
     this.registrationForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -48,3 +52,4 @@ export class RegistrationComponent implements OnInit {
     }
   }
 }
+

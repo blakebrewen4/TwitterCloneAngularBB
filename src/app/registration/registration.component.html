@@ -7,32 +7,36 @@
           <p>Join our community!</p>
         </div>
         <div class="card-body">
-          <form (ngSubmit)="register()" #registrationForm="ngForm">
+          <!-- Bind the form to the registrationForm FormGroup using [formGroup] -->
+          <form [formGroup]="registrationForm" (ngSubmit)="register()">
 
             <!-- Name -->
             <div class="form-group">
               <label for="name"><i class="fas fa-user"></i> Name</label>
-              <input type="text" class="form-control" id="name" name="name" [(ngModel)]="user.name" required>
+              <!-- Use formControlName to bind to the form control named 'name' -->
+              <input type="text" class="form-control" id="name" name="name" formControlName="name">
               <small class="form-text text-muted">Enter your full name.</small>
             </div>
 
             <!-- Email -->
             <div class="form-group">
               <label for="email"><i class="fas fa-envelope"></i> Email</label>
-              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" required>
+              <!-- Use formControlName to bind to the form control named 'email' -->
+              <input type="email" class="form-control" id="email" name="email" formControlName="email">
               <small class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
 
             <!-- Password -->
             <div class="form-group">
               <label for="password"><i class="fas fa-lock"></i> Password</label>
-              <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" required>
+              <!-- Use formControlName to bind to the form control named 'password' -->
+              <input type="password" class="form-control" id="password" name="password" formControlName="password">
               <small class="form-text text-muted">Must be 8-20 characters long.</small>
             </div>
 
             <!-- Submit Button -->
             <div class="form-group">
-              <button type="submit" class="btn btn-primary btn-block">Register</button>
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="!registrationForm.valid">Register</button>
             </div>
 
           </form>
@@ -41,6 +45,5 @@
     </div>
   </div>
 </div>
-
 
 

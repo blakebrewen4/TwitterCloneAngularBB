@@ -8,8 +8,8 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./feed.component.css']
 })
 export class FeedComponent implements OnInit {
-  tweets: Tweet[] = [];
   newTweet: string = '';
+  tweets: Tweet[] = [];
   private BASE_URL = environment.apiUrl;
 
   constructor(private http: HttpClient) { }

@@ -11,8 +11,10 @@ export class LoginComponent {
 
   user = {
     email: '',
-    password: ''
+    password: '',
+    rememberMe: false  // Add this line
   };
+
 
   // Add a variable to store the error message
   errorMessage: string | null = null;
