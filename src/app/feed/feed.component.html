@@ -1,19 +1,20 @@
-<!-- feed.component.html -->
-
-<div class="container">
-  <h2>Feed</h2>
+<div class="container mt-5">
+  <h2 class="mb-4">Feed</h2>
 
   <!-- Tweet Input -->
-  <div class="form-group">
-    <input type="text" class="form-control" [(ngModel)]="newTweet" placeholder="What's on your mind?" maxlength="280">
-    <button class="btn btn-primary" (click)="postTweet()">Tweet</button>
+  <div class="mb-3">
+    <textarea class="form-control" [(ngModel)]="newTweet" placeholder="What's on your mind?" rows="3" maxlength="280"></textarea>
+    <div class="d-flex justify-content-end mt-2">
+      <span class="text-muted me-2">{{280 - newTweet?.length || 0}} characters left</span>
+      <button class="btn btn-primary" (click)="postTweet()" [disabled]="!newTweet || newTweet?.length === 0">Tweet</button>
+    </div>
   </div>
 
   <!-- List of Tweets -->
-  <div class="tweet" *ngFor="let tweet of tweets">
-    <h5>{{ tweet.author }}</h5>
-    <p>{{ tweet.text }}</p>
-    <div class="tweet-actions">
+  <div class="tweet card mb-3 p-3" *ngFor="let tweet of tweets">
+    <h5 class="card-title">{{ tweet.author }}</h5>
+    <p class="card-text">{{ tweet.text }}</p>
+    <div class="tweet-actions d-flex justify-content-between">
       <button class="btn btn-outline-primary" (click)="likeTweet(tweet)">
         <i class="fas fa-heart"></i> Like
       </button>
@@ -26,5 +27,6 @@
     </div>
   </div>
 </div>
+
 
 

@@ -1,0 +1,105 @@
+/* Overall Feed Styling */
+.container {
+  max-width: 650px;
+  margin: auto;
+}
+
+/* Tweet Input Styling */
+textarea.form-control {
+  resize: none; /* Disable textarea resizing for consistency */
+  height: 100px; /* Give more space for user to type their tweet */
+  border-radius: 5px;
+  border: 1px solid #d1d5da;
+}
+
+  textarea.form-control:focus {
+    border-color: #0366d6;
+    box-shadow: 0 0 5px rgba(3, 102, 214, 0.2);
+  }
+
+/* Tweet Button Styling */
+.btn-primary {
+  background-color: #1da1f2;
+  border-color: #1da1f2;
+  color: #ffffff;
+  margin-top: 10px;
+}
+
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background-color: #0c84d2;
+    border-color: #0c84d2;
+  }
+
+/* Tweet Card Styling */
+.tweet.card {
+  border: 1px solid #e1e4e8;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 15px;
+  transition: box-shadow 0.3s ease;
+}
+
+  .tweet.card:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+/* Tweet Author Styling */
+.card-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #0366d6;
+}
+
+/* Tweet Content Styling */
+.card-text {
+  font-size: 16px;
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+/* Tweet Action Button Styling */
+.tweet-actions .btn {
+  font-size: 14px;
+  margin: 5px;
+  padding: 6px 12px;
+}
+
+  .tweet-actions .btn i {
+    margin-right: 5px;
+    font-size: 16px; /* Slightly larger icons for better visibility */
+  }
+
+/* Specific styling for different tweet actions */
+.tweet-actions .btn-outline-primary {
+  color: #1da1f2;
+  border-color: #1da1f2;
+}
+
+  .tweet-actions .btn-outline-primary:hover,
+  .tweet-actions .btn-outline-primary:focus {
+    background-color: #1da1f2;
+    color: #ffffff;
+  }
+
+.tweet-actions .btn-outline-info {
+  color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+  .tweet-actions .btn-outline-info:hover,
+  .tweet-actions .btn-outline-info:focus {
+    background-color: #17a2b8;
+    color: #ffffff;
+  }
+
+.tweet-actions .btn-outline-success {
+  color: #28a745;
+  border-color: #28a745;
+}
+
+  .tweet-actions .btn-outline-success:hover,
+  .tweet-actions .btn-outline-success:focus {
+    background-color: #28a745;
+    color: #ffffff;
+  }

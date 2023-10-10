@@ -1,0 +1,60 @@
+/* Container styling to center and give some spacing */
+.container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+/* Styling for the card */
+.card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+  .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+
+/* Styling for the input fields */
+.form-control {
+  border-radius: 5px;
+  border: 1px solid #d1d5da;
+}
+
+  .form-control:focus {
+    border-color: #1da1f2;
+    box-shadow: 0 0 5px rgba(29, 161, 242, 0.5);
+  }
+
+/* Button styling */
+.btn-primary {
+  background-color: #1da1f2;
+  border-color: #1da1f2;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background-color: #0c84d2;
+    border-color: #0c84d2;
+  }
+
+/* Remember me checkbox styling */
+.form-check-label {
+  font-size: 14px;
+  color: #6b6b6b;
+}
+
+/* Card footer styling */
+.card-footer {
+  background-color: #f7f7f7;
+}
+
+  .card-footer a {
+    color: #1da1f2;
+    text-decoration: none;
+  }
+
+    .card-footer a:hover {
+      text-decoration: underline;
+    }

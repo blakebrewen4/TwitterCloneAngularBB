@@ -1,42 +1,56 @@
-// profile.component.ts
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TweetService } from '../tweet/tweet.service'; // Adjust the path as needed
+import { Subscription } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent implements OnInit, OnDestroy {
   userTweets: any[] = [];
   user: any = {};
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private route: ActivatedRoute,
-    private tweetService: TweetService // Inject the TweetService
+    private tweetService: TweetService
   ) { }
 
   ngOnInit(): void {
-    // Retrieve the username from the route parameter
-    this.route.params.subscribe((params) => {
+    const routeSubscription = this.route.params.subscribe((params) => {
       const username = params['username'];
 
-      // Fetch user data (if needed)
-      // For demonstration purposes, I'm assuming a hardcoded user object.
-      // Replace this with your actual data retrieval logic.
+      // Fetch user data (replace with real logic)
       this.user = {
         name: 'John Doe',
         bio: 'A passionate developer',
         followers: 100,
-        // Add other user properties as needed
       };
 
-      // Fetch tweets based on the username
-      this.tweetService.getTweets(username).subscribe((tweets) => {
-        this.userTweets = tweets;
-      });
+      const tweetsSubscription = this.tweetService.getTweets(username)
+        .pipe(
+          catchError(error => {
+            console.error("Error fetching tweets:", error);
+            return [];
+          })
+        )
+        .subscribe((tweets) => {
+          this.userTweets = tweets;
+        });
+
+      this.subscriptions.push(tweetsSubscription);
     });
+
+    this.subscriptions.push(routeSubscription);
+  }
+
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions to prevent memory leaks
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 }
+
 
