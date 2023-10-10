@@ -1,1 +1,32 @@
-<p>tweet works!</p>
+<!-- tweet.component.html -->
+
+<div class="container">
+  <h2>Tweet Details</h2>
+  <div class="tweet">
+    <h5>{{ tweet.author }}</h5>
+    <p>{{ tweet.text }}</p>
+    <div class="tweet-actions">
+      <button class="btn btn-outline-primary" (click)="likeTweet(tweet)">
+        <i class="fas fa-heart"></i> Like
+      </button>
+      <button class="btn btn-outline-info" (click)="commentOnTweet(tweet)">
+        <i class="fas fa-comment"></i> Comment
+      </button>
+      <button class="btn btn-outline-success" (click)="retweet(tweet)">
+        <i class="fas fa-retweet"></i> Retweet
+      </button>
+    </div>
+  </div>
+
+  <h4>Comments</h4>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let comment of tweet.comments">
+      {{ comment.text }}
+    </li>
+  </ul>
+
+  <div class="comment-input">
+    <input type="text" class="form-control" [(ngModel)]="newComment" placeholder="Add a comment">
+    <button class="btn btn-primary" (click)="addComment(tweet)">Add Comment</button>
+  </div>
+</div>

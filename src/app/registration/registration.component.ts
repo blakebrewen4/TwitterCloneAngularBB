@@ -56,3 +56,4 @@ export class RegistrationComponent {
     return true; // Form is valid
   }
 }
+

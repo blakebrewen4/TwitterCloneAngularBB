@@ -7,12 +7,20 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FeedComponent } from './feed/feed.component';
 import { TweetComponent } from './tweet/tweet.component';
+import { FormsModule } from '@angular/forms';
 
 // Import RouterModule and Routes from '@angular/router'
 import { RouterModule, Routes } from '@angular/router';
 
-// Define your routes here (in this example, an empty array)
-const routes: Routes = [];
+// Define your routes here
+const routes: Routes = [
+  // Define your routes here, for example:
+  { path: 'registration', component: RegistrationComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'profile/:username', component: ProfileComponent },
+  { path: 'feed', component: FeedComponent },
+  { path: 'tweet', component: TweetComponent },
+];
 
 @NgModule({
   declarations: [
@@ -21,12 +29,13 @@ const routes: Routes = [];
     LoginComponent,
     ProfileComponent,
     FeedComponent,
-    TweetComponent
+    TweetComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    AppRoutingModule, // Make sure AppRoutingModule is correctly configured with your routes
     RouterModule.forRoot(routes), // Import and configure RouterModule with your routes
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
