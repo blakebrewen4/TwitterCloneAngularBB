@@ -1,0 +1,50 @@
+/* Container spacing */
+.container {
+  padding-top: 50px;
+}
+
+/* Profile image styling */
+.profile-img {
+  width: 50%;
+  max-width: 150px;
+  margin: 15px auto;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Follower info styling */
+.followers-info {
+  font-size: 1.2em;
+}
+
+/* Profile card styling */
+.card {
+  transition: box-shadow 0.3s ease;
+}
+
+  .card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+/* Edit profile button styling */
+.btn-primary {
+  background-color: #1da1f2;
+  border-color: #1da1f2;
+}
+
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background-color: #0c84d2;
+    border-color: #0c84d2;
+  }
+
+/* Tweets section */
+.list-group-item {
+  border: 1px solid #eaeaea;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+  .list-group-item:hover {
+    background-color: #f7f7f7;
+  }

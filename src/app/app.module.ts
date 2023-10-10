@@ -1,6 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppRoutingModule } from './app-routing.module';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';  // Import HttpClientModule
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
@@ -8,11 +12,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { FeedComponent } from './feed/feed.component';
 import { TweetComponent } from './tweet/tweet.component';
 
-// Import RouterModule and Routes from '@angular/router'
-import { RouterModule, Routes } from '@angular/router';
-
-// Define your routes here (in this example, an empty array)
-const routes: Routes = [];
+import { TweetService } from './tweet/tweet.service';
+import { AppRoutingModule } from './app-routing.module';  // Assuming you have an AppRoutingModule
 
 @NgModule({
   declarations: [
@@ -21,14 +22,17 @@ const routes: Routes = [];
     LoginComponent,
     ProfileComponent,
     FeedComponent,
-    TweetComponent
+    TweetComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes), // Import and configure RouterModule with your routes
+    RouterModule,
+    FormsModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [TweetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

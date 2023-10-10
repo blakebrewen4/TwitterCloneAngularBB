@@ -1,1 +1,41 @@
-<p>tweet works!</p>
+<div class="container my-5">
+  <h2 class="mb-4">Tweet Details</h2>
+
+  <!-- Single Tweet Container -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <!-- Author and Tweet Text -->
+      <h5 class="card-title">{{ tweet.author }}</h5>
+      <p class="card-text">{{ tweet.text }}</p>
+
+      <!-- Tweet Actions -->
+      <div class="tweet-actions d-flex justify-content-start mt-3">
+        <button class="btn btn-outline-primary mr-2" (click)="likeTweet()">
+          <i class="fas fa-heart"></i> Like
+        </button>
+        <button class="btn btn-outline-info mr-2" (click)="commentOnTweet()">
+          <i class="fas fa-comment"></i> Comment
+        </button>
+        <button class="btn btn-outline-success" (click)="retweet()">
+          <i class="fas fa-retweet"></i> Retweet
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comments Section -->
+  <h4 class="mb-3">Comments</h4>
+  <ul class="list-group mb-4">
+    <li class="list-group-item" *ngFor="let comment of tweet.comments">
+      <strong>{{ comment.author }}: </strong>{{ comment.text }}
+    </li>
+  </ul>
+
+  <!-- Add Comment Section -->
+  <div class="comment-input mb-3">
+    <input type="text" class="form-control mb-2" [(ngModel)]="newComment" placeholder="Add a comment">
+    <button class="btn btn-primary btn-block" (click)="addComment()">Add Comment</button>
+  </div>
+</div>
+
+

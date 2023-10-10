@@ -1,33 +1,36 @@
-<!-- tweet.component.html -->
-
 <div class="container">
-  <h2>Tweet Details</h2>
-  <div class="tweet">
-    <h5>{{ tweet.author }}</h5>
-    <p>{{ tweet.text }}</p>
-    <div class="tweet-actions">
-      <button class="btn btn-outline-primary" (click)="likeTweet(tweet)">
-        <i class="fas fa-heart"></i> Like
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#" aria-label="Home">Twitter Clone</a>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
       </button>
-      <button class="btn btn-outline-info" (click)="commentOnTweet(tweet)">
-        <i class="fas fa-comment"></i> Comment
-      </button>
-      <button class="btn btn-outline-success" (click)="retweet(tweet)">
-        <i class="fas fa-retweet"></i> Retweet
-      </button>
-    </div>
-  </div>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact: true}">
+            <a class="nav-link" routerLink="/feed" role="button">Feed</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link" routerLink="/profile" role="button">Profile</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link" routerLink="/login" role="button">Login</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link" routerLink="/registration" role="button">Registration</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
 
-  <h4>Comments</h4>
-  <ul class="list-group">
-    <li class="list-group-item" *ngFor="let comment of tweet.comments">
-      {{ comment.text }}
-    </li>
-  </ul>
-
-  <div class="comment-input">
-    <input type="text" class="form-control" [(ngModel)]="newComment" placeholder="Add a comment">
-    <button class="btn btn-primary" (click)="addComment(tweet)">Add Comment</button>
-  </div>
+  <main role="main">
+    <router-outlet></router-outlet>
+  </main>
 </div>
-

@@ -1,35 +1,55 @@
-// authentication.service.ts
-
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private isLoggedIn = false;
+  private isLoggedInSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isLoggedIn$: Observable<boolean> = this.isLoggedInSubject.asObservable();
+  private apiUrl = 'https://your-api-url'; // replace with your API base URL
 
-  // Simulated user data (replace with actual user data)
-  private mockUserData = {
-    email: 'example@example.com',
-    password: 'password123'
-  };
+  constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): boolean {
-    // Replace this with actual authentication logic (e.g., HTTP request to a server)
-    if (email === this.mockUserData.email && password === this.mockUserData.password) {
-      this.isLoggedIn = true;
-      return true;
-    } else {
-      this.isLoggedIn = false;
-      return false;
-    }
+  register(user: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/register`, user);
+  }
+
+  // This will now return an Observable to be more flexible and future-proof
+  login(email: string, password: string): Observable<any> {
+    const loginUrl = `${this.apiUrl}/login`;
+
+    return this.http.post<any>(loginUrl, { email, password }).pipe(
+      map(response => {
+        if (response && response.token) {
+          localStorage.setItem('authToken', response.token); // save token or user data to local storage
+          this.isLoggedInSubject.next(true);
+        }
+        return response;
+      }),
+      catchError(this.handleError)
+    );
   }
 
   logout(): void {
-    this.isLoggedIn = false;
+    localStorage.removeItem('authToken'); // remove token from local storage
+    this.isLoggedInSubject.next(false);
   }
 
   isAuthenticated(): boolean {
-    return this.isLoggedIn;
+    return !!localStorage.getItem('authToken'); // check if token exists in local storage
+  }
+
+  // Error handling for the service
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'An unknown error occurred!';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(errorMessage);
   }
 }
