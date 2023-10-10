@@ -7,95 +7,62 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./tweet.component.css']
 })
 export class TweetComponent {
-  @Input() tweet: any; // Input property to receive tweet data
-  newComment: string = ''; // Add newComment property
+  @Input() tweet: any;
+  newComment: string = '';
 
   constructor(private http: HttpClient) { }
 
-  likeTweet() {
-    // Toggle the isLiked property of the tweet
-    this.tweet.isLiked = !this.tweet.isLiked;
+  likeTweet(): void {
+    const wasLiked = this.tweet.isLiked;
+    this.tweet.isLiked = !wasLiked;
 
-    // Implement the logic to send a like request to your backend API
-    this.http.post<any>('https://your-api-url/like', { tweetId: this.tweet.id }).subscribe(
-      (response) => {
-        // Handle the response if needed
-        console.log('Liked tweet:', this.tweet);
-      },
-      (error) => {
-        // Handle the error if needed
+    this.sendLikeRequest().subscribe(
+      response => console.log('Liked tweet:', this.tweet),
+      error => {
         console.error('Error liking tweet:', error);
-        // Restore the like state if the request fails
-        this.tweet.isLiked = !this.tweet.isLiked;
+        this.tweet.isLiked = wasLiked;
       }
     );
   }
 
-  commentOnTweet() {
-    // Implement the logic to add a comment to a tweet
-    if (this.newComment) {
-      // Send a comment request to your backend API
-      this.http.post<any>('https://your-api-url/comment', {
-        tweetId: this.tweet.id,
-        commentText: this.newComment
-      }).subscribe(
-        (response) => {
-          // Handle the response if needed
+  commentOnTweet(): void {
+    if (this.newComment.trim()) {
+      this.sendCommentRequest().subscribe(
+        response => {
           console.log('Commented on tweet:', this.tweet);
-          // Clear the comment input
           this.newComment = '';
         },
-        (error) => {
-          // Handle the error if needed
-          console.error('Error commenting on tweet:', error);
-        }
+        error => console.error('Error commenting on tweet:', error)
       );
     }
   }
 
-  retweet() {
-    // Implement the logic to retweet a tweet
-    this.http.post<any>('https://your-api-url/retweet', { tweetId: this.tweet.id }).subscribe(
-      (response) => {
-        // Handle the response if needed
-        console.log('Retweeted tweet:', this.tweet);
-      },
-      (error) => {
-        // Handle the error if needed
-        console.error('Error retweeting tweet:', error);
-      }
+  retweet(): void {
+    this.sendRetweetRequest().subscribe(
+      response => console.log('Retweeted tweet:', this.tweet),
+      error => console.error('Error retweeting tweet:', error)
     );
   }
-  addComment() {
-    // Check if the newComment property exists and is not empty
-    if (this.tweet.newComment && this.tweet.newComment.trim() !== '') {
-      // Create a new comment object
-      const newComment = {
-        text: this.tweet.newComment,
-        // You can add other properties like author, timestamp, etc. if needed
-      };
 
-      // Push the new comment to the comments array of the current tweet
-      this.tweet.comments.push(newComment);
-
-      // Optionally, you can send a comment request to your backend API here
-      // For example:
-      // this.http.post<any>('https://your-api-url/comment', {
-      //   tweetId: this.tweet.id,
-      //   commentText: this.tweet.newComment
-      // }).subscribe(
-      //   (response) => {
-      //     // Handle the response if needed
-      //     console.log('Commented on tweet:', this.tweet);
-      //   },
-      //   (error) => {
-      //     // Handle the error if needed
-      //     console.error('Error commenting on tweet:', error);
-      //   }
-      // );
-
-      // Clear the comment input
-      this.tweet.newComment = '';
+  addComment(): void {
+    if (this.newComment.trim()) {
+      this.tweet.comments.push({ text: this.newComment.trim() });
+      this.newComment = '';
     }
+  }
+
+  private sendLikeRequest() {
+    return this.http.post<any>('https://your-api-url/like', { tweetId: this.tweet.id });
+  }
+
+  private sendCommentRequest() {
+    return this.http.post<any>('https://your-api-url/comment', {
+      tweetId: this.tweet.id,
+      commentText: this.newComment.trim()
+    });
+  }
+
+  private sendRetweetRequest() {
+    return this.http.post<any>('https://your-api-url/retweet', { tweetId: this.tweet.id });
   }
 }

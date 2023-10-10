@@ -13,6 +13,10 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
+  register(user: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/register`, user);
+  }
+
   // This will now return an Observable to be more flexible and future-proof
   login(email: string, password: string): Observable<any> {
     const loginUrl = `${this.apiUrl}/login`;

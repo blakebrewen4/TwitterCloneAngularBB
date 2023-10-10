@@ -1,0 +1,51 @@
+/* General styling for the container */
+.container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card styling */
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-header {
+  font-weight: bold;
+}
+
+/* Input styling */
+.form-control {
+  border-radius: 5px;
+  border: 1px solid #eaeaea;
+}
+
+  .form-control:focus {
+    border-color: #1da1f2;
+    box-shadow: 0 0 0 0.2rem rgba(29, 161, 242, 0.25);
+  }
+
+/* Button styling */
+.btn-primary {
+  background-color: #1da1f2;
+  border-color: #1da1f2;
+}
+
+  .btn-primary:hover,
+  .btn-primary:focus {
+    background-color: #0c84d2;
+    border-color: #0c84d2;
+  }
+
+/* Feedback text styling */
+.form-text {
+  font-size: 0.85em;
+}
+
+/* Icon styling (assuming you're using Font Awesome icons) */
+i.fas {
+  margin-right: 5px;
+}

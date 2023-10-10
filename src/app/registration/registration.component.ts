@@ -1,59 +1,50 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../login/authentication.service';
+
+interface User {
+  name: string;
+  email: string;
+  password: string;
+}
 
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent {
-  user = {
-    name: '',
-    email: '',
-    password: ''
-  };
+export class RegistrationComponent implements OnInit {
+  registrationForm!: FormGroup;  // Use the "definite assignment assertion"
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(
+    private fb: FormBuilder,
+    private authenticationService: AuthenticationService,
+    private router: Router
+  ) { }
 
-  register() {
-    // Perform client-side validation (you can add more validation checks)
-    if (!this.validateForm()) {
-      return;
-    }
-
-    // Send the registration data to the server (replace with your API endpoint)
-    this.http.post<any>('https://your-api-url/register', this.user).subscribe(
-      (response) => {
-        // Registration successful, handle the response
-        console.log('Registration successful', response);
-
-        // Redirect to the login page or another appropriate page
-        this.router.navigate(['/login']);
-      },
-      (error) => {
-        // Registration failed, handle the error
-        console.error('Registration failed', error);
-
-        // Display an error message to the user
-        // You can also update the UI to show the error message
-      }
-    );
+  ngOnInit(): void {
+    this.registrationForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+    });
   }
 
-  private validateForm(): boolean {
-    // Implement your validation logic here
-    // For example, check for required fields, password strength, etc.
-    if (!this.user.name || !this.user.email || !this.user.password) {
-      // Display an error message to the user (e.g., using Angular's MatSnackBar)
-      // You can also update the UI to show validation errors
-      console.error('Validation failed: All fields are required.');
-      return false;
+  register(): void {
+    if (this.registrationForm.valid) {
+      const user: User = this.registrationForm.value;
+      this.authenticationService.register(user).subscribe(
+        response => {
+          console.log('Registration successful', response);
+          this.router.navigate(['/login']);
+        },
+        error => {
+          console.error('Registration failed', error);
+        }
+      );
+    } else {
+      console.error('Validation failed: Check your input.');
     }
-
-    // Additional validation checks can be added here
-
-    return true; // Form is valid
   }
 }
-
